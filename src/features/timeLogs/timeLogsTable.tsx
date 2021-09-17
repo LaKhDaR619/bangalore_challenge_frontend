@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 import { Table } from "antd";
 import { fetchTimeLogs } from "./services";
+import { ColumnsType } from "antd/lib/table";
+import { TimeLogRow } from "./types";
 
 const useTimeLogs = (page: number, size: number) => {
   const { data, isLoading, isError, isFetching } = useQuery(
@@ -13,8 +15,8 @@ const useTimeLogs = (page: number, size: number) => {
 };
 
 const TimeLogsTable: React.FC = () => {
-  const [pageIndex, setPageIndex] = useState(0);
-  const [pageSize] = useState(10);
+  const [pageIndex, setPageIndex] = useState(1);
+  const [pageSize] = useState(1);
 
   const { resolvedData, isFetching } = useTimeLogs(pageIndex, pageSize);
   const { data, total = 0 } = resolvedData;
@@ -23,14 +25,17 @@ const TimeLogsTable: React.FC = () => {
     setPageIndex(current);
   };
 
-  const columns = [
+  const columns: ColumnsType<TimeLogRow> = [
     {
       title: "Start Time",
       dataIndex: "startTime",
+      key: "startTime",
+      render: (value) => <span>{value}</span>,
     },
     {
       title: "End Time",
       dataIndex: "endTime",
+      render: (value) => <span>{value}</span>,
     },
     {
       title: "Description",
@@ -44,7 +49,10 @@ const TimeLogsTable: React.FC = () => {
       dataSource={data}
       columns={columns}
       bordered
-      pagination={{ pageSize, total }}
+      pagination={{
+        pageSize,
+        total,
+      }}
       onChange={handleChange}
       loading={isFetching}
     />

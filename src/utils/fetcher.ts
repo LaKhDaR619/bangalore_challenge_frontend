@@ -8,7 +8,9 @@ const fetcher = async (endpoint: string, body?: any) => {
   }
 
   const response = await window.fetch(endpoint, config);
-  let data;
+
+  const data = await response.json();
+
   if (response.ok) {
     return data;
   }

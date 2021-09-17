@@ -16,7 +16,7 @@ const useTimeLogs = (page: number, size: number) => {
 
 const TimeLogsTable: React.FC = () => {
   const [pageIndex, setPageIndex] = useState(1);
-  const [pageSize] = useState(1);
+  const [pageSize] = useState(10);
 
   const { resolvedData, isFetching } = useTimeLogs(pageIndex, pageSize);
   const { data, total = 0 } = resolvedData;

@@ -3,3 +3,9 @@ export type TimeLogRow = {
   endTime: Date;
   description: string;
 };
+
+export type AddTimeLogForm = {
+  startTime: Date | null;
+  endTime: Date | null;
+  description: string;
+};

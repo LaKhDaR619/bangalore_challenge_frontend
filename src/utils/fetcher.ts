@@ -1,9 +1,11 @@
 const fetcher = async (endpoint: string, body?: any) => {
-  const config: RequestInit = {
+  const config: any = {
     method: body ? "POST" : "GET",
+    headers: {},
   };
 
   if (body) {
+    config.headers["Content-Type"] = "application/json";
     config.body = JSON.stringify(body);
   }
 

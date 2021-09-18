@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
+import { format } from "date-fns";
 import { Table } from "antd";
 import { fetchTimeLogs } from "./services";
 import { ColumnsType } from "antd/lib/table";
@@ -30,12 +31,16 @@ const TimeLogsTable: React.FC = () => {
       title: "Start Time",
       dataIndex: "startTime",
       key: "startTime",
-      render: (value) => <span>{value}</span>,
+      render: (value) => (
+        <span>{format(new Date(value), "yyyy MM dd HH:mm:ss")}</span>
+      ),
     },
     {
       title: "End Time",
       dataIndex: "endTime",
-      render: (value) => <span>{value}</span>,
+      render: (value) => (
+        <span>{format(new Date(value), "yyyy MM dd HH:mm:ss")}</span>
+      ),
     },
     {
       title: "Description",
